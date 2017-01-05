@@ -2,7 +2,7 @@
 
 ## Description
 
-This application can be used to keep track of departures and arrivals at an airport, as well as schedule new ones. It consists of two parts. The first is a laravel API that handles database interaction in the form of get and post request from the web interface. The front-end is built as a single-page web app using Angular and Materialize.css, which interacts with the api through ajax requests.
+This application can be used to keep track of departures and arrivals at an airport, as well as schedule new ones. It consists of two parts. The first is a laravel API that handles database interactions in the form of get and post requests from the web interface. The front-end is built as a single-page web app using Angular and Materialize.css, which interacts with the api through ajax requests.
 
 The application allows viewing collections of flights, as well as more detailed information about each flight, including schedule, history and attached controllers.
 It also alows the user to schedule a new flight. A side-note here, to allow for testing, the user is actually allowed to schedule flights back in time. This has been done to enable testing the comparison logic between a flight's history and it's schedule.

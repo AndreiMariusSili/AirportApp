@@ -25,6 +25,8 @@ Finally, you need to set up a dev environment. The project ships with a vagrantf
 * edit the *hosts* file to resolve the local ip **192.168.10.10** to **homestead.app**
 * edit the *yaml* file to map the project root on the VM to the project root on the host machine
 
+Also, do not forget to rename **.env.example** to **.env**.
+
 Finally, it is required to run the database migrations. Also, a database  seeder is provided in order to jump-start testing. Run the following commands from the root:
 * create database schema: **php artisan migrate** 
 * seed the database **php artisan db:seed**

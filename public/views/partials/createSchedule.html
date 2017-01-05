@@ -1,0 +1,116 @@
+<div ng-if="loadingFormData == true" class="loader-position">
+  <div class="valign-wrapper">
+    <div class="preloader-wrapper big active valign">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left"></div>
+        <div class="circle"></div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="loadingFormData == false">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s4">
+        <input disabled id="flight_code" type="text" class="indigo-text" ng-model="flight.code">
+        <label for="flight_code">Flight Code</label>
+      </div>
+      <div class="input-field col s4">
+        <input disabled id="type" type="text" class="indigo-text" ng-model="flight.carrier">
+        <label for="carrier">Carrier</label>
+      </div>
+      <div class="input-field col s4">
+        <input disabled id="type" type="text" class="indigo-text" ng-model="flight.type">
+        <label for="type">Type</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input disabled id="departure_point" type="text" class="indigo-text" ng-model="flight.departure_point">
+        <label for="departure_point">Origin</label>
+      </div>
+      <div disabled class="input-field col s6">
+        <input disabled id="arrival_point" type="text" class="indigo-text" ng-model="flight.arrival_point">
+        <label for="arrival_point">Destination</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+        <label for="flight_date">Flight Date</label>
+        <input input-date
+        ng-model="flight.schedule.date"
+        ng-change = "loadForm(flight.schedule.date, flight.schedule.time)"
+        type="text"
+        name="flight_date"
+        id="flight_date"
+        container=""
+        format="yyyy-mm-dd"
+        months-full="{{ datepicker.month }}"
+        months-short="{{ datepicker.monthShort }}"
+        weekdays-full="{{ datepicker.weekdaysFull }}"
+        weekdays-short="{{ datepicker.weekdaysShort }}"
+        weekdays-letter="{{ datepicker.weekdaysLetter }}"
+        disable="datepicker.disable"
+        min="{{ datepicker.minDate }}"
+        max="{{ datepicker.maxDate }}"
+        today="datepicker.today"
+        first-day="1"
+        clear="datepicker.clear"
+        close="datepicker.close"/>
+      </div>
+      <div class="col s6">
+        <label for="flight_time">Flight Time</label>
+        <input 
+        ng-model="flight.schedule.time"
+        ng-change = "loadForm(flight.schedule.date, flight.schedule.time)"
+        id="flight_time"
+        type="text"
+        input-clock 
+        data-twelvehour="false"
+        data-default="now"
+        data->
+      </div>
+    </div>
+    <div class="row" ng-if="alreadyScheduled == true">
+      <div class="col s12">
+        <div class="card red darken-4">
+          <div class="card-content white-text center-align">
+            <span class="card-title">The flight is already scheduled on that date.</span>
+            <p class="center-align">Please choose another date.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if = "showForm(flight.schedule.date, flight.schedule.time) == true && alreadyScheduled == false">
+      <div class="row">
+        <div class="col s6">
+          <label for="lane">Lane</label>
+          <div input-field>
+            <select id="lane" name="lane" ng-model="flight.schedule.lane" material-select watch>
+              <option class="indigo-text" ng-repeat="lane in lanes" value="{{lane}}">{{lane}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col s6">
+          <label for="controllers">Controllers</label>
+          <div input-field>
+            <select id="controllers" ng-model="flight.schedule.controllers" material-select multiple watch>
+              <option disabled value="undefined"></option>
+              <option ng-repeat="controller in controllers" value="{{controller.id}}">{{controller.code}} | {{controller.name}} {{controller.surname}}</option>
+            </select>
+          </div>
+        </div>
+        <button ng-if="flight.schedule.lane != undefined && flight.schedule.controllers != undefined && flight.schedule.controllers != ''" class="btn-large indigo waves-effect waves-light" type="submit" name="action" ng-click="submitSchedule()">Schedule
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

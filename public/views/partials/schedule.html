@@ -1,0 +1,64 @@
+<div ng-if="loadingScheduleData == true" class="loader-position">
+  <div class="valign-wrapper">
+    <div class="preloader-wrapper big active valign">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left"></div>
+        <div class="circle"></div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-if="loadingScheduleData == false">
+  <div class="row">
+    <div class="col s12">
+      <h4>Instance Details</h4>
+      <table class="z-depth-3">
+        <thead>
+          <tr>
+            <th data-field="id">Flight ID</th>
+            <th data-field="lane">Lane</th>
+            <th data-field="Date and Time">Date and Time</th>
+            <th data-field="status">Status</th>
+          </tr>
+        </thead>
+        <tbody ng-model="schedule">
+          <tr>
+            <td>{{schedule.flight_id}}</td>
+            <td>{{schedule.lane}}</td>
+            <td>{{schedule.flight_datetime}}</td>
+            <td>{{schedule.status}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <h4>Instance Controllers</h4>
+      <table class="z-depth-3">
+       <thead>
+        <tr>
+          <th data-field="code">Code</th>
+          <th data-field="name">Name</th>
+          <th data-field="surname">Surname</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="controller in schedule.controllers">
+        <tr>
+          <td>{{controller.code}}</td>
+          <td>{{controller.name}}</td>
+          <td>{{controller.surname}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>  
+</div>

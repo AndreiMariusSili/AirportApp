@@ -1,0 +1,138 @@
+<div ng-if="loadingFlightData == true" class="loader-position">
+  <div class="valign-wrapper">
+    <div class="preloader-wrapper big active valign">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left"></div>
+        <div class="circle"></div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div >
+  <div class="row" ng-if="loadingFlightData == false">
+    <div class="col s12">
+      <h4>{{flightInfo.type}} Details</h4>
+      <table class="z-depth-3">
+        <thead>
+          <tr>
+            <th data-field="code">Code</th>
+            <th data-field="carrier">Carrier</th>
+            <th data-field="departure_point">Origin</th>
+            <th data-field="arrival_point">Destination</th>
+          </tr>
+        </thead>
+        <tbody ng-model="flightInfo">
+          <tr>
+            <td>{{flightInfo.code}}</td>
+            <td>{{flightInfo.carrier}}</td>
+            <td>{{flightInfo.departure_point}}</td>
+            <td>{{flightInfo.arrival_point}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <table class="z-depth-3">
+        <thead>
+          <tr>
+            <th data-field="monday">Mon</th>
+            <th data-field="tuesday">Tue</th>
+            <th data-field="wednesday">Wed</th>
+            <th data-field="thursday">Thu</th>
+            <th data-field="Friday">Fri</th>
+            <th data-field="Saturday">Sat</th>
+            <th data-field="Sunday">Sun</th>
+          </tr>
+        </thead>
+        <tbody ng-model="flightInfo">
+          <tr class="indigo-text">
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Monday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Monday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Tuesday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Tuesday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Wednesday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Wednesday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Thursday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Thursday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Firday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Firday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Saturday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Saturday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+            <td ng-model="flightInfo.flight_days">
+              <i ng-if="checkDay('Sunday', flightInfo.flight_days) == true" class="material-icons">done</i>
+              <i ng-if="checkDay('Sunday', flightInfo.flight_days) == false" class="material-icons">stop</i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m6">
+      <h4>History</h4>
+      <table class="highlight z-depth-3">
+       <thead>
+        <tr>
+          <th data-field="date">Date and Time</th>
+          <th data-field="lane">Lane</th>
+          <th data-field="status">Status</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="history in flightHistory">
+        <tr ng-click="showSchedule(history.id)"">
+          <td>{{history.flight_datetime}}</td>
+          <td>{{history.lane}}</td>
+          <td>{{history.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s12 m6">
+    <h4>Schedule</h4>
+    <table class="highlight z-depth-3">
+     <thead>
+      <tr>
+        <th data-field="date">Date and Time</th>
+        <th data-field="lane">Lane</th>
+        <th data-field="status">Status</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="schedule in flightSchedule">
+      <tr ng-click="showSchedule(schedule.id)">
+        <td>{{schedule.flight_datetime}}</td>
+        <td>{{schedule.lane}}</td>
+        <td>{{schedule.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+<div class="fixed-action-btn" ng-model="flightInfo">
+  <a class="btn-floating btn-large indigo waves-effect" ng-click="createSchedule(flightInfo.id)">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
+</div>

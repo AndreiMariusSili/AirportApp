@@ -9,18 +9,26 @@ It also alows the user to schedule a new flight. A side-note here, to allow for 
 
 ## Project Setup
 
-The first step is to set up a dev environment. The project ships with a vagrantfile, configured for virtualbox. Assuming the VirtualBox and Vagrant are installed on the host machine, the stept necessary to set up the dev environment are:
+First of all, you need to: 
 * clone the repo to an empty folder
 * **cd** into the root folder of the project
-* run **vagrant up** from the terminal, which will create a vm dedicated to this project
-* edit the *hosts* file to resolve the local ip **192.168.10.10** to **equidam.dev**
 
-The second step is to install the project's dependecies. In order to do so, from the terminal **cd** to the root folder and run:
+Next, install the project's dependecies. In order to do so, from the root, run:
 * **composer install** to add back-end dependencies
 * **npm install** to add front-end dependencies
 * **gulp** to copy necessary assets to the public folder
 
-Finally, it is required to run the database migrations. Also, a database  seeder is provided in order to jump-start testing. Run the following commands from the root:
+Finally, you need to set up a dev environment. The project ships with a vagrantfile, configured for virtualbox. Assuming the VirtualBox and Vagrant are installed on the host machine, the stept necessary to set up the dev environment are:
+
+* run **php vendor/bin/homestead make** from the project root, which will create the config files for the VM
+* run **vagrant up** from the terminal, which will create a VM dedicated to this project
+* edit the *hosts* file to resolve the local ip **192.168.10.10** to **homestead.app**
+* edit the *yaml* file to map the project root on the VM to the project root on the host machine
+
+Also, do not forget to rename **.env.example** to **.env**.
+
+Finally, it is required to run the database migrations. Also, a database  seeder is provided in order to jump-start testing. Run the following commands from the vagrant VM root:
+* (**vagrant ssh** from the project root)
 * create database schema: **php artisan migrate** 
 * seed the database **php artisan db:seed**
 

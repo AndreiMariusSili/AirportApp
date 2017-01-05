@@ -1,40 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img width="150"src="https://laravel.com/laravel.png"></a></p>
+# Airport App
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+This application can be used to keep track of departures and arrivals at an airport, as well as schedule new ones. It consists of two parts. The first is a laravel API that handles database interactions in the form of get and post requests from the web interface. The front-end is built as a single-page web app using Angular and Materialize.css, which interacts with the api through ajax requests.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+The application allows viewing collections of flights, as well as more detailed information about each flight, including schedule, history and attached controllers.
+It also alows the user to schedule a new flight. A side-note here, to allow for testing, the user is actually allowed to schedule flights back in time. This has been done to enable testing the comparison logic between a flight's history and it's schedule.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Project Setup
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+The first step is to set up a dev environment. The project ships with a vagrantfile, configured for virtualbox. Assuming the VirtualBox and Vagrant are installed on the host machine, the stept necessary to set up the dev environment are:
+* clone the repo to an empty folder
+* **cd** into the root folder of the project
+* run **vagrant up** from the terminal, which will create a vm dedicated to this project
+* edit the *hosts* file to resolve the local ip **192.168.10.10** to **equidam.dev**
 
-## Learning Laravel
+The second step is to install the project's dependecies. In order to do so, from the terminal **cd** to the root folder and run:
+* **composer install** to add back-end dependencies
+* **npm install** to add front-end dependencies
+* **gulp** to copy necessary assets to the public folder
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+Finally, it is required to run the database migrations. Also, a database  seeder is provided in order to jump-start testing. Run the following commands from the root:
+* create database schema: **php artisan migrate** 
+* seed the database **php artisan db:seed**
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+##Database
 
-## Contributing
+The database consists of several tables which contain "master data". These are:
+* users : information about the admin user
+* airport : information about the airport
+* flights : general information about each flight that arrives or departs from the airport
+* flight_days : information about the days in which every flight is set to take off or land
+* controllers : information about the controllers employed at the airport
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Lastly, the schedules table pulls information from the flights, flight_days, and controllers to create a schedule for each flight with precise dates and times at which the flight wil depart/arrive. Each schedule has attached to it one or more controllers.
 
-## Security Vulnerabilities
+## Further considerations
+The application is intended as a proof of concept,thus some features remain unimplemented. Among those, the most obvious drawbacks are:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+1. there is not back-end validation for the post request
+    * all the data that the user is allowed to input through the web interface takes into account the necessary contraints:
+        - a flight can be scheduled only on the days in which it is supposed to fly
+        - the same lane and controller cannot be assigned on two flights which arrive/depart at less than an hour difference
+    * however, this can be easily modified by a malicious user by modifiyng HTML markup.
+2. seeder does not schedule flights, but only creates flight master data
+    * this means that schedules need to be manually added through the web interface for testing.
+    * most of the logic is there, but time constraints did not allow me to build the seeder for the schedule and controller models.
+3. lack of scalability
+    * as the application potentially grows, manually scheduling flights will require too much resources.
+    * this could be fixed by setting a scheduled task to create the flight schedule a month in advance , leaving the user to handle only update operations on the schedules
 
-## License
+## Final Note
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Never though I would say this, but Angular is pretty cool. You can do some amazing things using this framework, with relatively little effort once you get the hang of it. I have had both fun and frustrating times developing this POC. Overall, I am grateful I took the challenge and quite content with the outcome. Hope you guys will like it as well. :)

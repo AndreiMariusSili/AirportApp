@@ -17,7 +17,6 @@ angular.module('flightController', [])
                 $scope.flightHistory = response.data
             }).finally(function() {
                 $scope.loadingFlightData = false
-                console.log()
             })
         })
     })
@@ -28,7 +27,6 @@ angular.module('flightController', [])
             check = false
 
             days.forEach(function(schedule) {
-                console.log(day, schedule.day, (day == schedule.day))
                 if(day == schedule.day)
                 {
                     check = true

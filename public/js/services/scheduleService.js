@@ -16,12 +16,14 @@ angular.module("scheduleService", [])
         },
         
         submit: function(flightData) {
-            return $http({
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/javascript' },
-                url: 'api/schedule/store',
-                data: $.param(flightData)
-            })
+            return $http.post('api/schedule/store', flightData)
+            
+            // return $http({
+            //     method: 'POST',
+            //     headers: { 'Content-Type' : 'application/javascript' },
+            //     url: 'api/schedule/store',
+            //     data: $.param(flightData)
+            // })
         }
     }
 })
@@ -29,12 +31,14 @@ angular.module("scheduleService", [])
 .factory('Lanes', function($http) {
     return {
         get : function(datetime) {
-            return $http({
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/javascript' },
-                url: 'api/schedule/lanes',
-                data: $.param(datetime)
-            })
+            return $http.post('api/schedule/lanes', datetime)
+
+            // return $http({
+            //     method: 'POST',
+            //     headers: { 'Content-Type' : 'application/javascript' },
+            //     url: 'api/schedule/lanes',
+            //     data: $.param(datetime)
+            // })
         }
     }
 })
@@ -42,12 +46,14 @@ angular.module("scheduleService", [])
 .factory('CheckSchedule', function($http) {
     return {
         get : function(data) {
-            return $http({
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/javascript' },
-                url: 'api/schedule/check',
-                data: $.param(data)
-            })
+            return $http.post('api/schedule/check', data)
+
+            // return $http({
+            //     method: 'POST',
+            //     headers: { 'Content-Type' : 'application/javascript' },
+            //     url: 'api/schedule/check',
+            //     data: $.param(data)
+            // })
         }
     }
 })
@@ -56,12 +62,14 @@ angular.module("scheduleService", [])
 
     return {
         get : function($datetime) {
-            return $http({
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/javascript' },
-                url: 'api/schedule/controllers',
-                data: $.param(datetime)
-            })
+            return $http.post('api/schedule/controllers', datetime)
+
+            // return $http({
+            //     method: 'POST',
+            //     headers: { 'Content-Type' : 'application/javascript' },
+            //     url: 'api/schedule/controllers',
+            //     data: $.param(datetime)
+            // })
         }
     }
 })

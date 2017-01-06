@@ -125,14 +125,14 @@ angular.module('ScheduleController', [])
         // }
 })
 
-.controller('showScheduleCtrl', function($routeParams, $scope, Schedule) {
-    $scope.loadingScheduleData = true;
+// .controller('showScheduleCtrl', function($routeParams, $scope, Schedule) {
+//     $scope.loadingScheduleData = true;
 
-    Schedule.get($routeParams.id)
-        .then(function(response) {
-            $scope.schedule = response.data
-        })
-        .finally(function() {
-            $scope.loadingScheduleData = false;
-        })
-})
+//     Schedule.get($routeParams.id)
+//         .then(function(response) {
+//             $scope.schedule = response.data
+//         })
+//         .finally(function() {
+//             $scope.loadingScheduleData = false;
+//         })
+// })

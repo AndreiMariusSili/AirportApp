@@ -51,9 +51,14 @@ angular.module('ScheduleController', [])
                 }
 
                 CheckSchedule.get(data)
-                    .then(function(response) {
-                        $scope.alreadyScheduled = response.data.alreadyScheduled
-                    })
+                    .then(
+                        function sucessCallback(response) {
+                            $scope.alreadyScheduled = response.data.alreadyScheduled
+                        },
+                        function errorCallback(response) {
+                            console.log("The schedule could not be checked");
+                        }
+                    )
                 if (time != undefined && time != '')
                 {
                     datetime = {
@@ -69,9 +74,15 @@ angular.module('ScheduleController', [])
         {
             $scope.loadingLanes = true
             Lanes.get(datetime)
-                .then(function(response) {
-                    $scope.lanes = response.data
-                }).finally(function() {
+                .then (
+                    function sucessCallback(response) {
+                        $scope.lanes = response.data
+                    },
+                    function errorCallback(response) {
+                        console.log("The lanes could not be retrieved");
+                    }
+                )
+                .finally(function() {
                     $scope.loadingLanes = false
                 })
         }
@@ -80,9 +91,15 @@ angular.module('ScheduleController', [])
         {
             $scope.loadingControllers = true
             Controllers.get(datetime)
-                .then(function(response) {
-                    $scope.controllers = response.data
-                }).finally(function() {
+                .then (
+                    function sucessCallback(response) {
+                        $scope.controllers = response.data            
+                    },
+                    function errorCallback(response) {
+                        console.log("The controllers could not be retrieved");
+                    }
+                )
+                .finally(function() {
                     $scope.loadingControllers = false
             })
         }
@@ -95,9 +112,14 @@ angular.module('ScheduleController', [])
                 controllers: $scope.flight.schedule.controllers
             }
             ScheduledFlight.submit($flightData)
-                .then(function(response) {
-                    $scope.showSchedule(response.data.id)
-                })
+                .then(
+                    function successCallback(response) {
+                        $scope.showSchedule(response.data.id)
+                    },
+                    function errorCallback(response) {
+                        console.log("The flight could not be sceduled.");
+                    }
+                )
         }
 })
 

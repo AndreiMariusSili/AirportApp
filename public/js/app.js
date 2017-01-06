@@ -1,4 +1,4 @@
-var AirportApp = angular.module("AirportApp", ["ngRoute", "ui.materialize", "mainController", "flightController", "mainService", "flightService", "scheduleService"])
+var AirportApp = angular.module("AirportApp", ["ngRoute", "ui.materialize", "mainController", "flightController", "ScheduleController", "mainService", "flightService", "scheduleService"])
 
 AirportApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 

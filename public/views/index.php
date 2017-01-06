@@ -82,7 +82,7 @@
     
     <script type="text/javascript" src="/js/controllers/mainController.js"></script>
     <script type="text/javascript" src="/js/controllers/flightController.js"></script>
-    <!-- <script type="text/javascript" src="/js/controllers/ScheduleController.js"></script> -->
+    <script type="text/javascript" src="/js/controllers/ScheduleController.js"></script>
 
     <script type="text/javascript" src="/js/services/mainService.js"></script>
     <script type="text/javascript" src="/js/services/flightService.js"></script>

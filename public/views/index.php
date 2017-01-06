@@ -3,7 +3,7 @@
 <head>
     <title>AirportApp</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="/css/materialize.clockpicker.css">
 </head>
 <body ng-app="AirportApp" ng-controller="mainCtrl">
@@ -80,14 +80,20 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
     <script type="text/javascript" src="/js/materialize.clockpicker.js"></script>
     
-    <script src="/js/controllers/mainController.js"></script>
-    <script src="/js/controllers/flightController.js"></script>
-    <script src="/js/controllers/ScheduleController.js"></script>
+    <script type="text/javascript" src="/js/controllers/mainController.js"></script>
+    <script type="text/javascript" src="/js/controllers/flightController.js"></script>
+    <script type="text/javascript" src="/js/controllers/ScheduleController.js"></script>
 
-    <script src="/js/services/mainService.js"></script>
-    <script src="/js/services/flightService.js"></script>
-    <script src="/js/services/scheduleService.js"></script>
-    <script src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/services/mainService.js"></script>
+    <script type="text/javascript" src="/js/services/flightService.js"></script>
+    <script type="text/javascript" src="/js/services/scheduleService.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".button-collapse").sideNav();
+        })
+    </script>
 
     <style type="text/css">
         .container {
@@ -169,14 +175,6 @@
 
     }
 </style>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".button-collapse").sideNav();
-    })
-
-
-</script>
 
 </body>
 </html>

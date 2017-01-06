@@ -1,6 +1,8 @@
 angular.module('ScheduleController', [])
 
-.controller('createScheduleCtrl', function($routeParams, $scope, ScheduledFlight, Lanes, Controllers, CheckSchedule) {
+.controller('createScheduleCtrl', function($routeParams, $scope) {
+
+    // ScheduledFlight, Lanes, Controllers, CheckSchedule
 
     $scope.loadingFormData = true
 

@@ -1,4 +1,4 @@
-var AirportApp = angular.module("AirportApp", ["ngRoute", "ui.materialize", "mainController", "flightController", "mainService", "flightService", "scheduleService"])
+var AirportApp = angular.module("AirportApp", ["ngRoute", "ui.materialize", "mainController", "flightController", "ScheduleController", "mainService", "flightService", "scheduleService"])
 
 AirportApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
@@ -27,12 +27,12 @@ AirportApp.config(['$locationProvider', '$routeProvider', function($locationProv
 
             .when('/schedule/show/:id', {
                 templateUrl: 'views/partials/schedule.html',
-                // controller: 'showScheduleCtrl'
+                controller: 'showScheduleCtrl'
             })
 
             .when('/schedule/create/:id', {
                 templateUrl : 'views/partials/createSchedule.html',
-                // controller : 'createScheduleCtrl'
+                controller : 'createScheduleCtrl'
             })
 
             .otherwise( {

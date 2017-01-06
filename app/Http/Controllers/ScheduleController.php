@@ -71,7 +71,7 @@ class ScheduleController extends Controller
             $schedule->controllers()->attach($id);
         }
 
-        return response()->json(["id" => $schedule->id]);
+        return response()->json(["id" => $schedule->id])->withCallback($request->input('callback'));
     }
 
     /**
@@ -91,7 +91,7 @@ class ScheduleController extends Controller
             return response()->json(["alreadyScheduled" => false]);
         }
 
-        return response()->json(["alreadyScheduled" => true]);
+        return response()->json(["alreadyScheduled" => true])->withCallback($request->input('callback'));
 
     }
 
@@ -128,7 +128,7 @@ class ScheduleController extends Controller
             }
             
         }
-        return response()->json($lanes);
+        return response()->json($lanes)->withCallback($request->input('callback'));
     }
 
     /**
@@ -153,6 +153,6 @@ class ScheduleController extends Controller
                       ->whereBetween('schedules.flight_datetime', [$timeBottom , $timeTop]);
             })
             ->get();
-        return response()->json($controllers);
+        return response()->json($controllers)->withCallback($request->input('callback'));
     }
 }

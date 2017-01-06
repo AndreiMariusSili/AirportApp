@@ -4,10 +4,10 @@ angular.module('ScheduleController', [])
 
     $scope.loadingFormData = true
 
-    ScheduledFlight.get($routeParams.id)
-        .then(function(response) {
-            $scope.flight = response.data
-        })
+    // ScheduledFlight.get($routeParams.id)
+    //     .then(function(response) {
+    //         $scope.flight = response.data
+    //     })
         .finally(function () {
             var currentDate = new Date();
             var startOfWeek = moment().startOf("isoweek").toDate().getTime();
@@ -41,86 +41,86 @@ angular.module('ScheduleController', [])
                 return((date != undefined && date != '') && (time != undefined && time != ''))
         }
 
-        $scope.loadForm = function(date, time)
-        {
-            if(date != undefined && date != '')
-            {
-                var data = {
-                    id : $scope.flight.id,
-                    date: date
-                }
+        // $scope.loadForm = function(date, time)
+        // {
+        //     if(date != undefined && date != '')
+        //     {
+        //         var data = {
+        //             id : $scope.flight.id,
+        //             date: date
+        //         }
 
-                CheckSchedule.get(data)
-                    .then(
-                        function sucessCallback(response) {
-                            $scope.alreadyScheduled = response.data.alreadyScheduled
-                        },
-                        function errorCallback(response) {
-                            console.log("The schedule could not be checked");
-                        }
-                    )
-                if (time != undefined && time != '')
-                {
-                    datetime = {
-                        value: date + " " + time
-                    }
-                    $scope.getAvailableLanes(datetime)
-                    $scope.getAvailableControllers(datetime)
-                }
-            }
-        }
+        //         CheckSchedule.get(data)
+        //             .then(
+        //                 function sucessCallback(response) {
+        //                     $scope.alreadyScheduled = response.data.alreadyScheduled
+        //                 },
+        //                 function errorCallback(response) {
+        //                     console.log("The schedule could not be checked");
+        //                 }
+        //             )
+        //         if (time != undefined && time != '')
+        //         {
+        //             datetime = {
+        //                 value: date + " " + time
+        //             }
+        //             $scope.getAvailableLanes(datetime)
+        //             $scope.getAvailableControllers(datetime)
+        //         }
+        //     }
+        // }
 
-        $scope.getAvailableLanes = function(datetime)
-        {
-            $scope.loadingLanes = true
-            Lanes.get(datetime)
-                .then (
-                    function sucessCallback(response) {
-                        $scope.lanes = response.data
-                    },
-                    function errorCallback(response) {
-                        console.log("The lanes could not be retrieved");
-                    }
-                )
-                .finally(function() {
-                    $scope.loadingLanes = false
-                })
-        }
+        // $scope.getAvailableLanes = function(datetime)
+        // {
+        //     $scope.loadingLanes = true
+        //     Lanes.get(datetime)
+        //         .then (
+        //             function sucessCallback(response) {
+        //                 $scope.lanes = response.data
+        //             },
+        //             function errorCallback(response) {
+        //                 console.log("The lanes could not be retrieved");
+        //             }
+        //         )
+        //         .finally(function() {
+        //             $scope.loadingLanes = false
+        //         })
+        // }
 
-        $scope.getAvailableControllers = function(datetime)
-        {
-            $scope.loadingControllers = true
-            Controllers.get(datetime)
-                .then (
-                    function sucessCallback(response) {
-                        $scope.controllers = response.data            
-                    },
-                    function errorCallback(response) {
-                        console.log("The controllers could not be retrieved");
-                    }
-                )
-                .finally(function() {
-                    $scope.loadingControllers = false
-            })
-        }
+        // $scope.getAvailableControllers = function(datetime)
+        // {
+        //     $scope.loadingControllers = true
+        //     Controllers.get(datetime)
+        //         .then (
+        //             function sucessCallback(response) {
+        //                 $scope.controllers = response.data            
+        //             },
+        //             function errorCallback(response) {
+        //                 console.log("The controllers could not be retrieved");
+        //             }
+        //         )
+        //         .finally(function() {
+        //             $scope.loadingControllers = false
+        //     })
+        // }
 
-        $scope.submitSchedule = function() {
-            $flightData = {
-                flight_id : $scope.flight.id,
-                flight_datetime:$scope.flight.schedule.date + " " + $scope.flight.schedule.time,
-                lane: $scope.flight.schedule.lane,
-                controllers: $scope.flight.schedule.controllers
-            }
-            ScheduledFlight.submit($flightData)
-                .then(
-                    function successCallback(response) {
-                        $scope.showSchedule(response.data.id)
-                    },
-                    function errorCallback(response) {
-                        console.log("The flight could not be sceduled.");
-                    }
-                )
-        }
+        // $scope.submitSchedule = function() {
+        //     $flightData = {
+        //         flight_id : $scope.flight.id,
+        //         flight_datetime:$scope.flight.schedule.date + " " + $scope.flight.schedule.time,
+        //         lane: $scope.flight.schedule.lane,
+        //         controllers: $scope.flight.schedule.controllers
+        //     }
+        //     ScheduledFlight.submit($flightData)
+        //         .then(
+        //             function successCallback(response) {
+        //                 $scope.showSchedule(response.data.id)
+        //             },
+        //             function errorCallback(response) {
+        //                 console.log("The flight could not be sceduled.");
+        //             }
+        //         )
+        // }
 })
 
 .controller('showScheduleCtrl', function($routeParams, $scope, Schedule) {

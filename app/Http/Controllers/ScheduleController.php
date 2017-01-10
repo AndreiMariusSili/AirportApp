@@ -142,7 +142,7 @@ class ScheduleController extends Controller
         $scheduledDateTime = new Carbon($request->value);
 
         $timeTop = $scheduledDateTime->addHour()->toDateTimeString();
-        $timeBottom = $scheduledDateTime->subHour()->toDateTimeString();
+        $timeBottom = $scheduledDateTime->subHours(2)->toDateTimeString();
 
         $controllers = DB::table('controllers')        
             ->whereNotExists(function ($query) use ($timeBottom, $timeTop) {
@@ -150,9 +150,10 @@ class ScheduleController extends Controller
                       ->from('schedules')
                       ->join('controller_schedule', 'schedules.id', '=', 'controller_schedule.schedule_id')
                       ->whereRaw('controllers.id = controller_schedule.controller_id')
-                      ->whereBetween('schedules.flight_datetime', [$timeBottom , $timeTop]);
+                      ->whereBetween('schedules.flight_datetime', [$timeBottom, $timeTop]);
             })
             ->get();
+
         return response()->json($controllers);
     }
 }

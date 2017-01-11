@@ -141,8 +141,8 @@ class ScheduleController extends Controller
     {
         $scheduledDateTime = new Carbon($request->value);
 
-        $timeTop = $scheduledDateTime->addHour()->toDateTimeString();
-        $timeBottom = $scheduledDateTime->subHours(2)->toDateTimeString();
+        $timeTop = $scheduledDateTime->addMinutes($this->take_off_time)->toDateTimeString();
+        $timeBottom = $scheduledDateTime->subMinutes(2*$this->take_off_time)->toDateTimeString();
 
         $controllers = DB::table('controllers')        
             ->whereNotExists(function ($query) use ($timeBottom, $timeTop) {

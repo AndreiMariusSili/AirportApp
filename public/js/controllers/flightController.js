@@ -7,15 +7,18 @@ angular.module('flightController', [])
     Flight.getInfo($routeParams.id)
     .then(function(response) {
         $scope.flightInfo = response.data
-    }).finally(function() {
+    })
+    .finally(function() {
         Flight.getSchedule($routeParams.id)
         .then(function(response) {
             $scope.flightSchedule = response.data
-        }).finally(function() {
+        })
+        .finally(function() {
             Flight.getHistory($routeParams.id)
             .then(function(response) {
                 $scope.flightHistory = response.data
-            }).finally(function() {
+            })
+            .finally(function() {
                 $scope.loadingFlightData = false
             })
         })
@@ -35,8 +38,5 @@ angular.module('flightController', [])
 
             return check;
         }
-
-        
-
     }
 })
